@@ -50,7 +50,7 @@ class Login extends StatelessWidget {
                   onPressed: () {
                     // Aquí puedes agregar la lógica de autenticación
                     if (_userController.text == 'admin' && _passController.text == 'admin') {
-                      Navigator.pushNamed(context, '/journeyPaths');
+                      Navigator.pushNamed(context, '/home');
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Usuario o contraseña incorrectos')),
