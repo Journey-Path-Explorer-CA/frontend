@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/Home.dart';
 import 'package:frontend/views/Login.dart';
 
 void main() {
@@ -12,6 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        '/login': (context) => Login(),
+        '/home': (context) => Home(),
+        //'/dijkstra': (context) => Dijkstra(),
+        //'/ford': (context) => FordFulkerson(),
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
