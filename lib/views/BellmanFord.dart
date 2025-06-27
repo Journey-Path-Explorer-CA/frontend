@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/views/viewmodels/dijkstraviewmodel.dart';
+import 'package:frontend/views/viewmodels/astarviewmodel.dart';
+import 'package:frontend/views/viewmodels/bellmanfordviewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-class Dijsktra extends StatefulWidget {
-  const Dijsktra({super.key});
+class BellmanFord extends StatefulWidget {
+  const BellmanFord({super.key});
 
   @override
-  State<Dijsktra> createState() => _DijsktraState();
+  State<BellmanFord> createState() => _BellmanFordState();
 }
 
-class _DijsktraState extends State<Dijsktra> {
+class _BellmanFordState extends State<BellmanFord> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final vm = Provider.of<DijkstraViewModel>(context, listen: false);
+      final vm = Provider.of<BellmanFordViewModel>(context, listen: false);
       vm.fetchRoute();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<DijkstraViewModel>(context);
+    final viewModel = Provider.of<BellmanFordViewModel>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Dijkstra")),
+      appBar: AppBar(title: const Text("Bellman-Ford")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: viewModel.stops.isEmpty

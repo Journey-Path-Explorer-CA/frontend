@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/AStar.dart';
+import 'package:frontend/views/BellmanFord.dart';
 import 'package:frontend/views/Dijkstra.dart';
 import 'package:frontend/views/Home.dart';
 import 'package:frontend/views/Login.dart';
+import 'package:frontend/views/viewmodels/astarviewmodel.dart';
+import 'package:frontend/views/viewmodels/bellmanfordviewmodel.dart';
 import 'package:frontend/views/viewmodels/dijkstraviewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -17,14 +21,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => DijkstraViewModel())
+        ChangeNotifierProvider(create: (_) => DijkstraViewModel()),
+        ChangeNotifierProvider(create: (_) => AStarViewModel()),
+        ChangeNotifierProvider(create: (_) => BellmanFordViewModel())
       ],
       child: MaterialApp(
         routes: {
           '/login': (context) => Login(),
           '/home': (context) => Home(),
           '/dijkstra': (context) => Dijsktra(),
-          //'/ford': (context) => FordFulkerson(),
+          '/a-star': (context) => AStar(),
+          '/bellman-ford': (context) => BellmanFord()
         },
         title: 'Flutter Demo',
         theme: ThemeData(

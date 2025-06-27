@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/viewmodels/astarviewmodel.dart';
+import 'package:frontend/views/viewmodels/bellmanfordviewmodel.dart';
 import 'package:frontend/views/viewmodels/dijkstraviewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -97,6 +99,7 @@ class _HomeState extends State<Home> {
               description: 'Para calcular la ruta más corta.',
               onPressed: () {
                 final viewModel = Provider.of<DijkstraViewModel>(context, listen: false);
+                viewModel.resetValues();
                 viewModel.start = startController.text;
                 viewModel.end = endController.text;
 
@@ -107,14 +110,24 @@ class _HomeState extends State<Home> {
               label: 'A*',
               description: 'Para calcular la ruta óptima con heurística.',
               onPressed: () {
-                // lógica para A*
+                final viewModel = Provider.of<AStarViewModel>(context, listen: false);
+                viewModel.resetValues();
+                viewModel.start = startController.text;
+                viewModel.end = endController.text;
+
+                Navigator.pushNamed(context, '/a-star');
               },
             ),
             AlgorithmButton(
               label: 'Bellman-Ford',
               description: 'Para calcular rutas con posibles pesos negativos.',
               onPressed: () {
-                // lógica para Bellman-Ford
+                final viewModel = Provider.of<BellmanFordViewModel>(context, listen: false);
+                viewModel.resetValues();
+                viewModel.start = startController.text;
+                viewModel.end = endController.text;
+
+                Navigator.pushNamed(context, '/bellman-ford');
               },
             ),
           ],

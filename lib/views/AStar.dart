@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/views/viewmodels/dijkstraviewmodel.dart';
+import 'package:frontend/views/viewmodels/astarviewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-class Dijsktra extends StatefulWidget {
-  const Dijsktra({super.key});
+class AStar extends StatefulWidget {
+  const AStar({super.key});
 
   @override
-  State<Dijsktra> createState() => _DijsktraState();
+  State<AStar> createState() => _AStarState();
 }
 
-class _DijsktraState extends State<Dijsktra> {
+class _AStarState extends State<AStar> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final vm = Provider.of<DijkstraViewModel>(context, listen: false);
+      final vm = Provider.of<AStarViewModel>(context, listen: false);
       vm.fetchRoute();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<DijkstraViewModel>(context);
+    final viewModel = Provider.of<AStarViewModel>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Dijkstra")),
+      appBar: AppBar(title: const Text("A*")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: viewModel.stops.isEmpty

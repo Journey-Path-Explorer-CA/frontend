@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class DijkstraViewModel with ChangeNotifier {
+class BellmanFordViewModel with ChangeNotifier {
   String start = '';
   String end = '';
   double totalDistance = 0.0;
@@ -12,7 +11,7 @@ class DijkstraViewModel with ChangeNotifier {
 
   Future<void> fetchRoute() async {
     final url = Uri.parse(
-        'http://10.0.2.2:8000/dijkstra/stops?start_stop_id=$start&end_stop_id=$end');
+        'http://10.0.2.2:8000/bellman-ford/stops?start_stop_id=$start&end_stop_id=$end');
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -26,7 +25,7 @@ class DijkstraViewModel with ChangeNotifier {
 
   Future<double> getDistance() async {
     final url = Uri.parse(
-        'http://10.0.2.2:8000/dijkstra/distance?start_stop_id=$start&end_stop_id=$end');
+        'http://10.0.2.2:8000/bellman-ford/distance?start_stop_id=$start&end_stop_id=$end');
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
