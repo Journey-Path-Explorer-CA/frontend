@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/viewmodels/dijkstraviewmodel.dart';
+import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final TextEditingController startController = TextEditingController();
+  final TextEditingController endController = TextEditingController();
+
+  @override
+  void dispose() {
+    startController.dispose();
+    endController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,50 +28,136 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-
       drawer: Drawer(
         child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.only(left: 16.0),
               child: Text('Menu', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             MaterialButton(
               onPressed: () {},
-                child: Row(
-                  children: [
-                    Icon(Icons.home, size: 28),
-                    SizedBox(width: 10),
-                    Text('Home', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                  ],
-                )
+              child: const Row(
+                children: [
+                  Icon(Icons.home, size: 28),
+                  SizedBox(width: 10),
+                  Text('Home', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                ],
+              ),
             ),
-            SizedBox(height: 650),
-
-            Divider(thickness: 2),
-            SizedBox(height: 20),
+            const Spacer(),
+            const Divider(thickness: 2),
+            const SizedBox(height: 20),
             MaterialButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
               },
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(Icons.logout, size: 28),
                   SizedBox(width: 10),
-                  Text('Cerrar Sesion', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  Text('Cerrar Sesión', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
                 ],
               ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 40),
+            const Text('Ingrese los datos', style: TextStyle(fontSize: 18)),
+            const SizedBox(height: 20),
+            TextField(
+              controller: startController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Ingrese la parada inicial',
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: endController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Ingrese la parada final',
+              ),
+            ),
+            const SizedBox(height: 30),
+            const Text('Elija el algoritmo a utilizar:', style: TextStyle(fontSize: 16)),
+            const SizedBox(height: 20),
+            AlgorithmButton(
+              label: 'Dijkstra',
+              description: 'Para calcular la ruta más corta.',
+              onPressed: () {
+                final viewModel = Provider.of<DijkstraViewModel>(context, listen: false);
+                viewModel.start = startController.text;
+                viewModel.end = endController.text;
+
+                Navigator.pushNamed(context, '/dijkstra');
+              },
+            ),
+            AlgorithmButton(
+              label: 'A*',
+              description: 'Para calcular la ruta óptima con heurística.',
+              onPressed: () {
+                // lógica para A*
+              },
+            ),
+            AlgorithmButton(
+              label: 'Bellman-Ford',
+              description: 'Para calcular rutas con posibles pesos negativos.',
+              onPressed: () {
+                // lógica para Bellman-Ford
+              },
             ),
           ],
         ),
       ),
     );
+  }
+}
 
+class AlgorithmButton extends StatelessWidget {
+  final String label;
+  final String description;
+  final VoidCallback onPressed;
 
+  const AlgorithmButton({
+    required this.label,
+    required this.description,
+    required this.onPressed,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              backgroundColor: Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            onPressed: onPressed,
+            child: Text(label, style: const TextStyle(fontSize: 18, color: Colors.white)),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(description, style: const TextStyle(fontSize: 12)),
+        const SizedBox(height: 12),
+      ],
+    );
   }
 }
