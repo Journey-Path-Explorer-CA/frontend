@@ -8,6 +8,7 @@ import 'package:frontend/views/Login.dart';
 import 'package:frontend/views/viewmodels/astarviewmodel.dart';
 import 'package:frontend/views/viewmodels/bellmanfordviewmodel.dart';
 import 'package:frontend/views/viewmodels/dijkstraviewmodel.dart';
+import 'package:frontend/views/viewmodels/homeviewmodel.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => HomeViewModel()),
         ChangeNotifierProvider(create: (_) => DijkstraViewModel()),
         ChangeNotifierProvider(create: (_) => AStarViewModel()),
         ChangeNotifierProvider(create: (_) => BellmanFordViewModel())
