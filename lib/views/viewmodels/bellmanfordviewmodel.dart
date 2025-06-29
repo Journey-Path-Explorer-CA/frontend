@@ -11,7 +11,7 @@ class BellmanFordViewModel with ChangeNotifier {
 
   Future<void> fetchRoute() async {
     final url = Uri.parse(
-        'http://10.0.2.2:8000/bellman-ford/stops?start_stop_id=$start&end_stop_id=$end');
+        'https://journey-path-explorer-ca-backend.onrender.com/bellman-ford/stops?start_stop_id=$start&end_stop_id=$end');
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -25,7 +25,7 @@ class BellmanFordViewModel with ChangeNotifier {
 
   Future<double> getDistance() async {
     final url = Uri.parse(
-        'http://10.0.2.2:8000/bellman-ford/distance?start_stop_id=$start&end_stop_id=$end');
+        'https://journey-path-explorer-ca-backend.onrender.com/bellman-ford/distance?start_stop_id=$start&end_stop_id=$end');
 
     final response = await http.get(url);
     if (response.statusCode == 200) {

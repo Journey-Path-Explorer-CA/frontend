@@ -12,7 +12,7 @@ class AStarViewModel with ChangeNotifier {
 
   Future<void> fetchRoute() async {
     final url = Uri.parse(
-        'http://10.0.2.2:8000/a-star/stops?start_stop_id=$start&end_stop_id=$end');
+        'https://journey-path-explorer-ca-backend.onrender.com/a-star/stops?start_stop_id=$start&end_stop_id=$end');
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -26,7 +26,7 @@ class AStarViewModel with ChangeNotifier {
 
   Future<double> getDistance() async {
     final url = Uri.parse(
-        'http://10.0.2.2:8000/a-star/distance?start_stop_id=$start&end_stop_id=$end');
+        'https://journey-path-explorer-ca-backend.onrender.com/a-star/distance?start_stop_id=$start&end_stop_id=$end');
 
     final response = await http.get(url);
     if (response.statusCode == 200) {

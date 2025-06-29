@@ -21,7 +21,7 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:8000/calendar/services'));
+      final response = await http.get(Uri.parse('https://journey-path-explorer-ca-backend.onrender.com/calendar/services'));
       if (response.statusCode == 200) {
         services = List<Map<String, dynamic>>.from(json.decode(response.body));
       } else {
@@ -38,7 +38,7 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:8000/trips/by_service/$serviceId'));
+      final response = await http.get(Uri.parse('https://journey-path-explorer-ca-backend.onrender.com/trips/by_service/$serviceId'));
       if (response.statusCode == 200) {
         trips = List<Map<String, dynamic>>.from(json.decode(response.body));
         selectedTripId = null;
@@ -59,7 +59,7 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:8000/stop_times/by_trip/$tripId'));
+      final response = await http.get(Uri.parse('https://journey-path-explorer-ca-backend.onrender.com/stop_times/by_trip/$tripId'));
       if (response.statusCode == 200) {
         stops = List<Map<String, dynamic>>.from(json.decode(response.body));
         selectedStartStopId = null;
