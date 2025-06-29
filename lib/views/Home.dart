@@ -4,6 +4,8 @@ import 'package:frontend/views/viewmodels/bellmanfordviewmodel.dart';
 import 'package:frontend/views/viewmodels/dijkstraviewmodel.dart';
 import 'package:provider/provider.dart';
 
+import 'ComparisonScreen.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -128,6 +130,31 @@ class _HomeState extends State<Home> {
                 viewModel.end = endController.text;
 
                 Navigator.pushNamed(context, '/bellman-ford');
+              },
+            ),
+            AlgorithmButton(
+              label: 'Compare Algorithms',
+              description: 'View all routes side by side',
+              onPressed: () {
+                final dijkstraVM = Provider.of<DijkstraViewModel>(context, listen: false);
+                final aStarVM = Provider.of<AStarViewModel>(context, listen: false);
+                final bellmanFordVM = Provider.of<BellmanFordViewModel>(context, listen: false);
+
+                dijkstraVM.resetValues();
+                aStarVM.resetValues();
+                bellmanFordVM.resetValues();
+
+                dijkstraVM.start = startController.text;
+                dijkstraVM.end = endController.text;
+                aStarVM.start = startController.text;
+                aStarVM.end = endController.text;
+                bellmanFordVM.start = startController.text;
+                bellmanFordVM.end = endController.text;
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ComparisonScreen()),
+                );
               },
             ),
           ],
