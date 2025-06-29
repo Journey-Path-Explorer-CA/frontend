@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/AStar.dart';
 import 'package:frontend/views/BellmanFord.dart';
+import 'package:frontend/views/ComparisonScreen.dart';
 import 'package:frontend/views/Dijkstra.dart';
 import 'package:frontend/views/Home.dart';
 import 'package:frontend/views/Login.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
           '/home': (context) => Home(),
           '/dijkstra': (context) => Dijsktra(),
           '/a-star': (context) => AStar(),
-          '/bellman-ford': (context) => BellmanFord()
+          '/bellman-ford': (context) => BellmanFord(),
+          '/compare': (context) => ComparisonScreen()
         },
         title: 'Flutter Demo',
         theme: ThemeData(
