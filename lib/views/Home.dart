@@ -72,13 +72,15 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            const Text('Seleccione los filtros', style: TextStyle(fontSize: 18)),
-            const SizedBox(height: 20),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              const Text('Seleccione los filtros', style: TextStyle(fontSize: 18)),
+              const SizedBox(height: 20),
 
             // Service Dropdown
             _buildDropdown(
@@ -208,6 +210,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    )
     );
   }
 
